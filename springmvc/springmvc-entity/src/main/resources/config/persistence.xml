@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit name="springmvc_persistence_unit"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.springmvc.example.entity.User</class>
+		<properties>
+			<property name="hibernate.ejb.autodetection" value="class" />
+			<property name="hibernate.hbm2ddl.auto" value="check" />
+			<property name="hibernate.show_sql" value="springmvc.hibernate.showsql" />
+			<property name="hibernate.autocommit" value="true" />
+			<!-- connection details -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+		</properties>
+		<!-- Named JPQL queries -->
+		<mapping-file></mapping-file>
+	</persistence-unit>
+</persistence>
