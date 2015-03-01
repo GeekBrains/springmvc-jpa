@@ -19,6 +19,10 @@ import com.springmvc.example.formbean.LoginFormBean;
 import com.springmvc.example.formbean.UserFormBean;
 import com.springmvc.example.helper.LoginHelper;
 
+/*@author: Nitin Varshney
+ *
+ */
+
 @Controller
 public class LoginController {
 
@@ -34,6 +38,13 @@ public class LoginController {
 		binder.setValidator(validator);
 	}
 	
+	/**
+	 * View login page.
+	 *
+	 * @param userFormBean the user form bean
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = "/doLogin", method = RequestMethod.GET)
 	public String viewLoginPage(@ModelAttribute("userFormBean") UserFormBean userFormBean,Model model) {
 		return "/index";
