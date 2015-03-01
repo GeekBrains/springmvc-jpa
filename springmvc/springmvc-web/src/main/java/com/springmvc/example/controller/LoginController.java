@@ -17,22 +17,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springmvc.example.formbean.LoginFormBean;
 import com.springmvc.example.formbean.UserFormBean;
-import com.springmvc.example.helper.LoginHelper;
+import com.springmvc.example.helper.UserHelper;
 
+// TODO: Auto-generated Javadoc
 /*@author: Nitin Varshney
  *
  */
 
+/**
+ * The Class LoginController.
+ */
 @Controller
 public class LoginController {
 
+	/** The validator. */
 	@Autowired
 	@Qualifier("LoginValidator")
 	private Validator validator;
 	
+	/** The login helper. */
 	@Autowired
-	private LoginHelper loginHelper;
+	private UserHelper userHelper;
 	
+	/**
+	 * Inits the binder.
+	 *
+	 * @param binder the binder
+	 */
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.setValidator(validator);
@@ -50,6 +61,15 @@ public class LoginController {
 		return "/index";
 	}
 
+	/**
+	 * Do login.
+	 *
+	 * @param userFormBean the user form bean
+	 * @param bindingResult the binding result
+	 * @param model the model
+	 * @param request the request
+	 * @return the string
+	 */
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	public String doLogin(@ModelAttribute("userFormBean") @Validated UserFormBean userFormBean,
 			BindingResult bindingResult,Model model, HttpServletRequest request) {
@@ -57,7 +77,7 @@ public class LoginController {
 		if(bindingResult.hasErrors()){
 			return "/index";
 		}
-		boolean isValidUser=loginHelper.isValidUser(userFormBean.getLoginFormBean(), request);
+		boolean isValidUser=userHelper.isValidUser(userFormBean.getLoginFormBean(), request);
 		if(isValidUser){
 			forwardedPath="/dashboard";
 		}else{
@@ -67,8 +87,16 @@ public class LoginController {
 		return forwardedPath;
 	}
 
+	/**
+	 * Do registration.
+	 *
+	 * @param userFormBean the user form bean
+	 * @param bindingResult the binding result
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = "/doRegistration", method = RequestMethod.POST)
-	public String doRegistration(@ModelAttribute("userDTO") UserFormBean userDTO,
+	public String doRegistration(@ModelAttribute("userFormBean") UserFormBean userFormBean,
 			BindingResult bindingResult, Model model) {
 		return "/dashboard";
 	}

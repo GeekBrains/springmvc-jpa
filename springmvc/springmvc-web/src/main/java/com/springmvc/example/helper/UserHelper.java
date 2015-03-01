@@ -11,7 +11,7 @@ import com.springmvc.example.formbean.LoginFormBean;
 import com.springmvc.example.service.UserService;
 
 @Component
-public class LoginHelper {
+public class UserHelper {
 
 	@Autowired
 	private UserService userService;
